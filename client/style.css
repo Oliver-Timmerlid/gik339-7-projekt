@@ -1,0 +1,38 @@
+.zoom {
+	margin-top: 1rem;
+    transition: transform 0.4s ease-in-out;
+}
+.zoom:hover {
+	transform: scale(1.05);
+	z-index: 5;
+}
+
+h1 {
+    margin: 2rem 0 0;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    size: 2rem;
+}
+body {
+    
+    /* background-color: papayawhip; */
+  }
+
+  .grid {
+    /* text-align: center; */
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+
+
+.test {
+    background-image: url("./img/19859.jpg"); /* The image used Image by Harryarts on Freepik*/
+    background-color: #cccccc; /* Used if the image is unavailable */
+    height: 20rem;
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+}
+
+.navbar {
+    /* background-color: rgb(231, 239, 245); */
+}

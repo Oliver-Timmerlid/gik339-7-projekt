@@ -16,7 +16,7 @@ INSERT INTO movies(id,Title,Genre,Year) VALUES (6,'The Lord of the Rings: The Re
 INSERT INTO movies(id,Title,Genre,Year) VALUES (7,'Unknown: The lost pyramid','Documentary','2023');
 INSERT INTO movies(id,Title,Genre,Year) VALUES (8,'The Gentlemen','Action','2019');
 INSERT INTO movies(id,Title,Genre,Year) VALUES (9,'Paddington','Comedy','2014');
-INSERT INTO movies(id,Title,Genre,Year) VALUES (10,'Fanny och Alexaner','Drama','1982');
+INSERT INTO movies(id,Title,Genre,Year) VALUES (10,'Fanny och Alexander','Drama','1982');
 
 
 select * from movies;
