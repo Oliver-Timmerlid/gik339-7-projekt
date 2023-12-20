@@ -40,6 +40,19 @@ server.get('/movies', (req, res) => {
 	// db.close();
 });
 
+server.get('/movies/:id', (req,res) => {
+	const id = req.params.id;
+	const sql = `SELECT * FROM movies WHERE id=${id}`;
+
+	db.all(sql, (err, rows) => {
+		if (err) {
+			res.status(500).send(err);
+		} else {
+			res.send(rows[0]);
+		}
+	});
+});
+
 server.post('/movies', (req, res) => {
 	const movie = req.body;
 	const sql = `INSERT INTO movies(Title, Genre, Year) VALUES (?,?,?)`;
@@ -61,11 +74,46 @@ server.put('/movies', (req, res) => {
 
 	const id = bodyData.id;
 
-	const user = {
+	const movie = {
 		Title: bodyData.Title,
 		Genre: bodyData.Genre,
 		Year: bodyData.Year,
 	};
+
+	let updateString = "";
+	const columnsArray = Object.keys(movie);
+	columnsArray.forEach((column, i)=>{
+		updateString += `${column}="${movie[column]}"`;
+		if(i !== columnsArray.length - 1) updateString += ',';
+	});
+	
+	
+	const sql = `UPDATE movies SET ${updateString} WHERE id=${id}`;
+
+	db.run(sql, (err) => {
+		if (err) {
+			console.log(err);
+			res.status(500).send(err);
+		} else {
+			res.send('Movie updated');
+		}
+	});
 });
 
-server.delete('/movies/:id', (req, res) => {});
+server.delete('/movies/:id', (req, res) => {
+	const id = req.params.id;
+	const sql = `DELETE FROM movies WHERE id = ${id}`;
+
+	db.run(sql, (err) => {
+		if(err){
+			console.log(err);
+			res.status(500).send(err);
+
+		} else {
+			res.send('The movie with id: '+ id + ' was deleted')
+		}
+	});
+});
+
+
+
