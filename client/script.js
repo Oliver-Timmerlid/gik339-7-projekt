@@ -1,3 +1,10 @@
+//design 
+//rullistan för genre inkl färg kodat
+//storlek på card
+//header och footer bild
+//
+
+
 const url = 'http://localhost:3000/movies';
 const sampleText =
 	'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimad minim veniam, quis nostrud exercitation ullamco laboris nisi utaliquip ex ea commodo consequat. Duis aute irure dolor inreprehenderit in voluptate velit esse cillum dolore eu fugiat nullapariatur. Excepteur sint occaecat cupidatat non proident, sunt inculpa qui officia deserunt mollit anim id est laborum.';
@@ -84,42 +91,58 @@ function handleSubmit(e) {
 
 	console.log(serverUserObject);
 
-
-
 	const id = localStorage.getItem('currentId');
 	if (id) {
 		serverUserObject.id = id;
-	} 
+	}
 
 	console.log(serverUserObject);
 
 	const method = serverUserObject.id ? 'PUT' : 'POST';
-	
+
 	const request = new Request(url, {
 		method: method,
 		headers: {
 			'content-type': 'application/json',
 		},
-		body: JSON.stringify(serverUserObject)
-		
+		body: JSON.stringify(serverUserObject),
 	});
 
+	if (request.method == 'PUT') {
+		var exampleModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
+			keyboard: false
+		});
+		exampleModal.hide();
+
+		var changeModal = new bootstrap.Modal(document.getElementById('changeModal'), {
+			keyboard: false
+		});
+		changeModalHeader.innerText = 'Successful update';
+		changeModalBodyText.innerText = `id: ${id}`;
+	
+		changeModal.show();
+	}
+	
 	console.log(request);
 
-
 	fetch(request).then((response) => {
-		
 		console.log(response);
 		localStorage.removeItem('currentId');
 		movieForm.reset();
 	});
 }
 
-
-function deleteFunction(id) {
-	console.log('delete', id);
-	fetch(`${url}/${id}`, { method: 'DELETE' }).then((result) => fetchData());
-}
+// function deleteFunction(id) {
+// 	console.log('delete', id);
+// 	fetch(`${url}/${id}`, { method: 'DELETE' })
+// 		.then((result) => {
+// 			fetchData();
+// 			return result;
+// 		})
+// 		.then((result) => {
+// 			openModal();
+// 		});
+// }
 
 function preFill(id) {
 	fetch(`${url}/${id}`)
@@ -132,4 +155,41 @@ function preFill(id) {
 
 			localStorage.setItem('currentId', movie.id);
 		});
+}
+
+function resetForm() {
+	movieForm.reset();
+}
+
+// function openModal() {
+// 	const deleteModal = document.getElementById('deleteModal');
+// 	deleteModal.style.display = 'block';
+// }
+
+function deleteFunction(id) {
+	console.log('delete', id);
+
+
+	fetch(`${url}/${id}`, { method: 'DELETE' })
+		.then((result) => {
+			console.log('Filmen har tagits bort.');
+			fetchData();
+		})
+		// .then((result) => {
+		// 	fetchData();
+		// 	return result;
+		// })
+		.catch((error) => {
+			console.error('Ett fel uppstod:', error);
+		});
+
+	
+	var changeModal = new bootstrap.Modal(document.getElementById('changeModal'), {
+		keyboard: false
+	});
+	// const changeModalHeaderinnerText = document.getElementById('');
+	changeModalHeader.innerText = 'Successful delete';
+	changeModalBodyText.innerText = `id: ${id}`;
+	
+	changeModal.show();
 }

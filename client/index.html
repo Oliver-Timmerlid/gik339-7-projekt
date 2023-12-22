@@ -22,102 +22,125 @@
 		<header class="test">
 			<h1 class="display-1 p-5 text-center">Movies</h1>
 		</header>
-        
+
 		<section
 			class="container grid overflow-hidden pt-3"
 			id="grid">
-            <nav class="navbar bg-body-secondary">
-                <!-- bg-body-tertiary -->
-                <div class="container-fluid">
-                    <a
-                        class="navbar-brand"
-                        href="https://www.du.se/"
-                        >HDU</a
-                    >
-                    <!-- Button trigger modal -->
-                    <button
-                        type="button"
-                        class="btn btn-primary"
-                        data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">
-                        Add Movie
-                    </button>
-    
-                    <!-- Modal -->
-                    <div
-                        class="modal fade"
-                        id="exampleModal"
-                        tabindex="-1"
-                        aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1
-                                        class="modal-title fs-5"
-                                        id="exampleModalLabel">
-                                        Enter information
-                                    </h1>
-                                </div>
-                                <div class="modal-body">
-                                    <form id="movieForm">
-                                        <div class="mb-3">
-                                            <label
-                                                for="inputTitle"
-                                                class="form-label"
-                                                >Title</label
-                                            >
-                                            <input
-                                                type="text"
-                                                class="form-control textField"
-                                                id="inputTitle"
-                                                name="inputTitle"
-                                                aria-describedby="nameHelp" />
-                                        </div>
-                                        <div class="mb-3">
-                                            <label
-                                                for="inputGenre"
-                                                class="form-label"
-                                                >Genre</label
-                                            >
-                                            <input
-                                                type="text"
-                                                class="form-control textField"
-                                                id="inputGenre"
-                                                name="inputGenre" />
-                                        </div>
-                                        <div class="mb-3">
-                                            <label
-                                                for="inputYear"
-                                                class="form-label"
-                                                >Year</label
-                                            >
-                                            <input
-                                                type="number"
-                                                min="1901"
-                                                max="2099"
-                                                step="1"
-                                                value="2016"
-                                                class="form-control textField"
-                                                id="inputYear"
-                                                name="inputYear" />
-                                        </div>
-                                        <button
-                                            type="submit"
-                                            class="btn btn-primary">
-                                            Submit
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
+			<nav class="navbar bg-body-secondary">
+				<!-- bg-body-tertiary -->
+				<div class="container-fluid">
+					<a
+						class="navbar-brand"
+						href="https://www.du.se/"
+						>HDU</a
+					>
+					<!-- Button trigger modal -->
+					<button
+						type="button"
+						class="btn btn-primary"
+						data-bs-toggle="modal"
+						data-bs-target="#exampleModal"
+						onClick="resetForm()">
+						Add Movie
+					</button>
+
+					<!-- Modal -->
+					<div
+						class="modal fade"
+						id="exampleModal"
+						tabindex="-1"
+						aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h1
+										class="modal-title fs-5"
+										id="exampleModalLabel">
+										Enter information
+									</h1>
+								</div>
+								<div class="modal-body">
+									<form id="movieForm">
+										<div class="mb-3">
+											<label
+												for="inputTitle"
+												class="form-label"
+												>Title</label
+											>
+											<input
+												type="text"
+												class="form-control textField"
+												id="inputTitle"
+												name="inputTitle"
+												aria-describedby="nameHelp" />
+										</div>
+										<div class="mb-3">
+											<label
+												for="inputGenre"
+												class="form-label"
+												>Genre</label
+											>
+											<input
+												type="text"
+												class="form-control textField"
+												id="inputGenre"
+												name="inputGenre" />
+										</div>
+										<div class="mb-3">
+											<label
+												for="inputYear"
+												class="form-label"
+												>Year</label
+											>
+											<input
+												type="number"
+												min="1901"
+												max="2099"
+												step="1"
+												value="2016"
+												class="form-control textField"
+												id="inputYear"
+												name="inputYear" />
+										</div>
+										<button
+											type="submit"
+											class="btn btn-primary">
+											Submit
+										</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</nav>
+			<div
+				class="modal fade"
+				id="changeModal"
+				tabindex="-1">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1
+								class="modal-title fs-5"
+								id="changeModalHeader">
+								
+							</h1>
+						</div>
+                        <div class="modal-body" id="changeModalBody">
+                            <p class="modal-text" id="changeModalBodyText"></p>
                         </div>
-                    </div>
-                </div>
-            </nav>
+					</div>
+				</div>
+			</div>
 			<div
 				class="row gy-4"
 				id="row"></div>
 		</section>
+        <footer class="test">
+
+        </footer>
 		<script
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
 			integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
