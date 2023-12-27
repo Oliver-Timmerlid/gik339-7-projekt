@@ -7,36 +7,27 @@
 	z-index: 5;
 }
 
-
-
-
-h1 {
-    /* margin: 2rem 0 0; */
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-    size: 2rem;
+.card-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
-body {
+.card-header {
+    overflow: hidden;
+    text-overflow: ellipsis;
     
-    /* background-color: papayawhip; */
-  }
-
-  .grid {
-    /* text-align: center; */
-    font-family: Arial, Helvetica, sans-serif;
-  }
-
-
+}
+.card:hover {
+    overflow: visible !important;
+    white-space: normal !important;
+}
 
 .test {
-    background-image: url("./img/19859.jpg"); /* The image used Image by Harryarts on Freepik*/
-    background-color: #cccccc; /* Used if the image is unavailable */
-    height: 20rem;
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-size: cover; /* Resize the background image to cover the entire container */
+   
+    /* background: rgb(63,94,251);
+    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%); */
+    /* background: rgb(2,0,36);
+    background: radial-gradient(circle, rgba(2,0,36,1) 21%, rgba(9,121,115,1) 62%, rgba(0,212,255,1) 81%); */
+    background: rgb(27,9,27);
+    background: radial-gradient(circle, rgba(27,9,27,1) 27%, rgba(87,242,242,1) 53%, rgba(40,14,44,1) 87%);
+   
 }
-
-.navbar {
-    /* background-color: rgb(231, 239, 245); */
-}
-

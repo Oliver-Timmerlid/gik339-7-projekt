@@ -1,13 +1,7 @@
-//design 
-//rullistan för genre inkl färg kodat
-//storlek på card
-//header och footer bild
-//
+//design
 
 
 const url = 'http://localhost:3000/movies';
-const sampleText =
-	'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimad minim veniam, quis nostrud exercitation ullamco laboris nisi utaliquip ex ea commodo consequat. Duis aute irure dolor inreprehenderit in voluptate velit esse cillum dolore eu fugiat nullapariatur. Excepteur sint occaecat cupidatat non proident, sunt inculpa qui officia deserunt mollit anim id est laborum.';
 
 async function fetchMovies() {
 	const response = await fetch(url);
@@ -22,7 +16,13 @@ async function fetchMovies() {
 		row.insertAdjacentElement('beforeend', col);
 
 		const card = document.createElement('article');
-		card.classList.add('card', 'zoom', 'text-center');
+		card.classList.add(
+			'card',
+			'zoom',
+			'text-center',
+			'text-nowrap',
+			'overflow-hidden'
+		);
 		col.append(card);
 
 		const cardHeader = document.createElement('div');
@@ -30,7 +30,7 @@ async function fetchMovies() {
 		card.append(cardHeader);
 
 		const cardBody = document.createElement('div');
-		cardBody.classList.add('card-body');
+		cardBody.classList.add('card-body', 'bg-gradient');
 		card.append(cardBody);
 
 		const cardTextOne = document.createElement('p');
@@ -41,14 +41,9 @@ async function fetchMovies() {
 		cardTextTwo.classList.add('card-text', 'fs-5');
 		cardBody.append(cardTextTwo);
 
-		// const cardTextThree = document.createElement('p');
-		// cardTextThree.classList.add('card-text', 'fs-6');
-		// cardBody.append(cardTextThree);
-
 		cardHeader.innerText = movie.Title;
 		cardTextOne.innerText = 'Genre: ' + movie.Genre;
 		cardTextTwo.innerText = 'Year: ' + movie.Year;
-		// cardTextThree.innerText = sampleText
 
 		const cardFooter = document.createElement('div');
 		cardFooter.classList.add('card-footer');
@@ -69,6 +64,38 @@ async function fetchMovies() {
 			onClick="deleteFunction(${movie.id})">
 			Delete
 		</button>`;
+
+		switch (movie.Genre) {
+			case 'Action':
+				cardBody.classList.add('bg-danger');
+				break;
+			case 'Comedy':
+				cardBody.classList.add('bg-success-subtle');
+				break;
+			case 'Drama':
+				cardBody.classList.add('bg-primary-subtle');
+				break;
+			case 'Romance':
+				cardBody.classList.add('bg-danger-subtle');
+				break;
+			case 'Animation':
+				cardBody.classList.add('bg-info');
+				break;
+			case 'Adventure':
+				cardBody.classList.add('bg-secondary-subtle');
+				break;
+			case 'ScienceFiction':
+				cardBody.classList.add('bg-info-subtle');
+				break;
+			case 'Documentary':
+				cardBody.classList.add('bg-warning');
+				break;
+			case 'Thriller':
+				cardBody.classList.add('bg-warning-subtle');
+				break;
+			// default:
+			//   statements
+		}
 	});
 }
 
@@ -84,6 +111,11 @@ function handleSubmit(e) {
 		Genre: '',
 		Year: '',
 	};
+
+	if (movieForm.inputGenre.value == "--Choose a genre--") {
+		alert('Please choose a genre');
+		return false;
+	}
 
 	serverUserObject.Title = movieForm.inputTitle.value;
 	serverUserObject.Genre = movieForm.inputGenre.value;
@@ -109,20 +141,27 @@ function handleSubmit(e) {
 	});
 
 	if (request.method == 'PUT') {
-		var exampleModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
-			keyboard: false
-		});
+		var exampleModal = new bootstrap.Modal(
+			document.getElementById('exampleModal'),
+			{
+				keyboard: false,
+			}
+		);
 		exampleModal.hide();
 
-		var changeModal = new bootstrap.Modal(document.getElementById('changeModal'), {
-			keyboard: false
-		});
+		var changeModal = new bootstrap.Modal(
+			document.getElementById('changeModal'),
+			{
+				keyboard: false,
+			}
+		);
 		changeModalHeader.innerText = 'Successful update';
 		changeModalBodyText.innerText = `id: ${id}`;
+
 	
 		changeModal.show();
 	}
-	
+
 	console.log(request);
 
 	fetch(request).then((response) => {
@@ -130,19 +169,10 @@ function handleSubmit(e) {
 		localStorage.removeItem('currentId');
 		movieForm.reset();
 	});
+
+	// fetchMovies();
 }
 
-// function deleteFunction(id) {
-// 	console.log('delete', id);
-// 	fetch(`${url}/${id}`, { method: 'DELETE' })
-// 		.then((result) => {
-// 			fetchData();
-// 			return result;
-// 		})
-// 		.then((result) => {
-// 			openModal();
-// 		});
-// }
 
 function preFill(id) {
 	fetch(`${url}/${id}`)
@@ -161,35 +191,29 @@ function resetForm() {
 	movieForm.reset();
 }
 
-// function openModal() {
-// 	const deleteModal = document.getElementById('deleteModal');
-// 	deleteModal.style.display = 'block';
-// }
 
 function deleteFunction(id) {
 	console.log('delete', id);
-
 
 	fetch(`${url}/${id}`, { method: 'DELETE' })
 		.then((result) => {
 			console.log('Filmen har tagits bort.');
 			fetchData();
 		})
-		// .then((result) => {
-		// 	fetchData();
-		// 	return result;
-		// })
 		.catch((error) => {
 			console.error('Ett fel uppstod:', error);
 		});
 
-	
-	var changeModal = new bootstrap.Modal(document.getElementById('changeModal'), {
-		keyboard: false
-	});
-	// const changeModalHeaderinnerText = document.getElementById('');
+	var changeModal = new bootstrap.Modal(
+		document.getElementById('changeModal'),
+		{
+			keyboard: false,
+		}
+	);
 	changeModalHeader.innerText = 'Successful delete';
 	changeModalBodyText.innerText = `id: ${id}`;
+
 	
 	changeModal.show();
+
 }
