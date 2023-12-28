@@ -57,7 +57,6 @@ server.post('/movies', (req, res) => {
 	const movie = req.body;
 	const sql = `INSERT INTO movies(Title, Genre, Year) VALUES (?,?,?)`;
 
-	// const sql = 'INSERT INTO movies (id,Title,Genre,Year)'
 
 	db.run(sql, Object.values(movie), (err) => {
 		if (err) {

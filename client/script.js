@@ -1,6 +1,5 @@
 //design
 
-
 const url = 'http://localhost:3000/movies';
 
 async function fetchMovies() {
@@ -48,7 +47,7 @@ async function fetchMovies() {
 		const cardFooter = document.createElement('div');
 		cardFooter.classList.add('card-footer');
 		card.append(cardFooter);
-		cardFooter.innerHTML = `<!-- Button trigger modal -->
+		cardFooter.innerHTML = `
 		<button
 			type="button"
 			class="btn btn-outline-success"
@@ -112,7 +111,7 @@ function handleSubmit(e) {
 		Year: '',
 	};
 
-	if (movieForm.inputGenre.value == "--Choose a genre--") {
+	if (movieForm.inputGenre.value == '--Choose a genre--') {
 		alert('Please choose a genre');
 		return false;
 	}
@@ -141,15 +140,7 @@ function handleSubmit(e) {
 	});
 
 	if (request.method == 'PUT') {
-		var exampleModal = new bootstrap.Modal(
-			document.getElementById('exampleModal'),
-			{
-				keyboard: false,
-			}
-		);
-		exampleModal.hide();
-
-		var changeModal = new bootstrap.Modal(
+		const changeModal = new bootstrap.Modal(
 			document.getElementById('changeModal'),
 			{
 				keyboard: false,
@@ -158,7 +149,17 @@ function handleSubmit(e) {
 		changeModalHeader.innerText = 'Successful update';
 		changeModalBodyText.innerText = `id: ${id}`;
 
-	
+		changeModal.show();
+	} else {
+		const changeModal = new bootstrap.Modal(
+			document.getElementById('changeModal'),
+			{
+				keyboard: false,
+			}
+		);
+		changeModalHeader.innerText = 'Movie added';
+		// changeModalBodyText.innerText = `id: ${id}`;
+		changeModalBodyText.innerText = `Movie name: ${serverUserObject.Title}`;
 		changeModal.show();
 	}
 
@@ -169,10 +170,8 @@ function handleSubmit(e) {
 		localStorage.removeItem('currentId');
 		movieForm.reset();
 	});
-
-	// fetchMovies();
+	refresh();
 }
-
 
 function preFill(id) {
 	fetch(`${url}/${id}`)
@@ -191,7 +190,6 @@ function resetForm() {
 	movieForm.reset();
 }
 
-
 function deleteFunction(id) {
 	console.log('delete', id);
 
@@ -204,7 +202,7 @@ function deleteFunction(id) {
 			console.error('Ett fel uppstod:', error);
 		});
 
-	var changeModal = new bootstrap.Modal(
+	const changeModal = new bootstrap.Modal(
 		document.getElementById('changeModal'),
 		{
 			keyboard: false,
@@ -213,7 +211,12 @@ function deleteFunction(id) {
 	changeModalHeader.innerText = 'Successful delete';
 	changeModalBodyText.innerText = `id: ${id}`;
 
-	
 	changeModal.show();
+	refresh();
+}
 
+function refresh() {
+	setTimeout(function () {
+		location.reload();
+	}, 3000);
 }
